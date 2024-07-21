@@ -8,8 +8,11 @@ import requests;
 import numpy as np;
 import pandas as pd;
 
+import io;
+
 from transformers import AutoTokenizer, AutoModel;
 
+from tqdm import tqdm;
 
 weight_file_location = "weights.pt";
 
@@ -21,6 +24,20 @@ df = pd.read_csv(weight_file_location);
 model_name = "bert-base-uncased" if df.iloc[0]['model'] == 'BERT' else "FacebookAI/roberta-base";
 test_file_location = df.iloc[0]['test'];
 
+
+#downloading file
+def get_file(url):
+	buffer = io.BytesIO();
+	response = requests.get(url,stream=True);
+	if response.status_code == 200:
+		for chunk in tqdm(response.iter_content(chunk_size=32768),ascii=True,desc="Downloading weights.."):
+			buffer.write(chunk);
+	
+	buffer.seek(0);
+	
+	return buffer;
+	
+	
 # importing tokenizer
 tokenizer = AutoTokenizer.from_pretrained(model_name);
 	
@@ -39,6 +56,8 @@ class Classifier(nn.Module):
         	return output;
 
 model = Classifier(model_name,3);
+model = model.to(device);
+model = model.load_state_dict(get_file(),map_device=device);
 
 # dataset creation
 class CustomDataset(Dataset):
