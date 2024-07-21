@@ -1,0 +1,13 @@
+model,labels,weight,train,validation,test
+BERT,BERT used as embedding with top-k rouge scored sentences as input,https://drive.google.com/file/d/1LmVWHeGfJ-R4_KkR9NlfanTM0bGI752q/view?usp=drive_link,rev_trainset_cmb.txt,rev_valset_cmb.txt,rev_testset_cmb.txt
+BERT,BERT used as embedding with normal truncation as input,https://drive.google.com/file/d/1ybuY66DI-JxMARMEmjBu8yi-UAz7UoEI/view?usp=sharing,trainset_cmb.txt,valset_cmb.txt,testset_cmb.txt
+BERT,BERT used as finetuning with top-k rouge scored sentences as input,https://drive.google.com/file/d/1-9LdJ2I9eMumafW3-Dmlm5HOXEoWFm8B/view?usp=drive_link,rev_trainset_cmb.txt,rev_valset_cmb.txt,rev_testset_cmb.txt
+BERT,BERT used as finetuning with normal truncation as input,https://drive.google.com/file/d/1Ceq46SX1_GFc5SIJo4s8PKHqpnVeXrpX/view?usp=sharing,trainset_cmb.txt,valset_cmb.txt,testset_cmb.txt
+RoBERTa,RoBERTa used as embedding with top-k rouge scored sentences as input,https://drive.google.com/file/d/1H_Z223alLWMfEY32DeTlVjzsF8Z3o0CA/view?usp=drive_link,rev_trainset_cmb.txt,rev_valset_cmb.txt,rev_testset_cmb.txt
+RoBERTa,RoBERTa used as embedding with normal truncation as input,https://drive.google.com/file/d/1YsVJdEe_rZnRJS4XmWd7ni3-eqFp5dwU/view?usp=drive_link,trainset_cmb.txt,valset_cmb.txt,testset_cmb.txt
+RoBERTa,RoBERTa used as finetuning with top-k rouge scored sentences as input,https://drive.google.com/file/d/1wKmZ-Q9ScFQ2A866JPMMz4noaAdkIA7l/view?usp=drive_link,rev_trainset_cmb.txt,rev_valset_cmb.txt,rev_testset_cmb.txt
+RoBERTa,RoBERTa used as finetuning with normal truncation as input,https://drive.google.com/file/d/1leF6sG0-X9iK_Dz5X6K3fd9XP1FfzHoT/view?usp=drive_link,trainset_cmb.txt,valset_cmb.txt,testset_cmb.txt
+RoBERTa,RoBERTa used as finetuning with top-k text-rank scored sentences as input,https://drive.google.com/file/d/1Yj17j2fZEgBla0h8imm9ibGnKmppxzOh/view?usp=drive_link,TR_trainset_cmb.txt,TR_valset_cmb.txt,TR_testset_cmb.txt
+RoBERTa,RoBERTa used as finetuning with top-k BERTSUMEXT scored sentences as input,https://drive.google.com/file/d/157AudtsdJ_5HADXWF5zAX51BWDBAUAxB/view?usp=drive_link,trainset_cmb_T_topK.txt,valset_cmb_T_topK.txt,testset_cmb_T_topK.txt
+RoBERTa,RoBERTa used as finetuning with maximum cumulative BERTSUMEXT scored sequence as input,https://drive.google.com/file/d/1-7fpaDWpoHH3wAz8oBIgO0Biwmebqd3M/view?usp=sharing,trainset_cmb_T_seq.txt,valset_cmb_T_seq.txt,testset_cmb_T_seq.txt
+RoBERTa,RoBERTa used as finetuning with maximum cumulative BERTSUMEXT scored subsequence as input,https://drive.google.com/file/d/1h_yY7A8-0uWctd5rwkvMUempR2NtP8ii/view?usp=sharing,trainset_cmb_T_subseq.txt,valset_cmb_T_subseq.txt,testset_cmb_T_subseq.txt
