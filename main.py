@@ -3,61 +3,90 @@ import torch.nn as nn;
 import torch.nn.functional as F;
 from torch.utils.data import Dataset, DataLoader;
 
-import requests;
+import gdown;
 
 import numpy as np;
 import pandas as pd;
 
 import io;
+import os;
 
-from transformers import AutoTokenizer, AutoModel;
+from transformers import AutoTokenizer, AutoModel, BertModel, RobertaModel;
 
 from tqdm import tqdm;
 
+import gc;
+
 weight_file_location = "weights.pt";
 
-device = torch.device("cuda" torch.cuda.is_available() else "cpu");
+#device = torch.device("cuda" if torch.cuda.is_available() else "cpu");
+device = torch.device("cpu");
 print(device);
 
 df = pd.read_csv(weight_file_location);
 
-model_name = "bert-base-uncased" if df.iloc[0]['model'] == 'BERT' else "FacebookAI/roberta-base";
-test_file_location = df.iloc[0]['test'];
+print(df['labels']);
+print("Enter Label :-");
+index = int(input("Waiting for Input.. "))
+
+
+model_name = "bert-base-uncased" if df.iloc[index]['model'] == 'BERT' else "FacebookAI/roberta-base";
+test_file_location = df.iloc[index]['test'];
+url = df.iloc[index]['weight'];
 
 
 #downloading file
 def get_file(url):
-	buffer = io.BytesIO();
-	response = requests.get(url,stream=True);
-	if response.status_code == 200:
-		for chunk in tqdm(response.iter_content(chunk_size=32768),ascii=True,desc="Downloading weights.."):
-			buffer.write(chunk);
+	FILE_ID = url.split("/")[5];
+	m_url = f"https://drive.google.com/uc?export=download&id={FILE_ID}";
+	output_file = "output.weights.pt";
 	
-	buffer.seek(0);
-	
-	return buffer;
+	gdown.download(m_url,output_file,quiet=False);
 	
 	
 # importing tokenizer
+print("Downloading Tokenizer..");
 tokenizer = AutoTokenizer.from_pretrained(model_name);
-	
-# importing model
-class Classifier(nn.Module):
-	def __init__(self, model_name, num_classes):
-		super(Classifier, self).__init__();
-        	self.model = AutoModel.from_pretrained(model_name);
-        	self.dropout = nn.Dropout(p=0.2);
-        	self.fc = nn.Linear(self.model.config.hidden_size, num_classes);	
-	
-	def forward(self,input_ids,attention_mask):
-		output = self.model(input_ids=input_ids, attention_mask=attention_mask);
-        	output = self.dropout(output.pooler_output);
-        	output = self.fc(output);
-        	return output;
 
-model = Classifier(model_name,3);
+
+def getClassifier(model_name):
+	if model_name == "FacebookAI/roberta-base":
+		class ROBERTaClassifier(nn.Module):
+    			def __init__(self, model_name, num_classes):
+        			super(ROBERTaClassifier, self).__init__();
+        			self.bert = RobertaModel.from_pretrained(model_name);
+        			self.dropout = nn.Dropout(p=0.2);
+        			self.fc = nn.Linear(self.bert.config.hidden_size, num_classes);
+
+    			def forward(self, input_ids, attention_mask):
+        			output = self.bert(input_ids=input_ids, attention_mask=attention_mask);
+        			output = self.dropout(output.pooler_output);
+        			output = self.fc(output);
+        			return output;
+	
+		return ROBERTaClassifier(model_name,3);
+	else:
+		class Classifier(nn.Module):
+			def __init__(self, model_name, num_classes):
+				super(Classifier, self).__init__();
+				self.bert = BertModel.from_pretrained(model_name);
+				self.dropout = nn.Dropout(p=0.2);
+				self.fc = nn.Linear(self.bert.config.hidden_size, num_classes);	
+	
+			def forward(self,input_ids,attention_mask):
+				output = self.bert(input_ids=input_ids, attention_mask=attention_mask);
+				output = self.dropout(output.pooler_output);
+				output = self.fc(output);
+				return output;
+		
+		return Classifier(model_name,3);
+
+	
+model = getClassifier(model_name);
 model = model.to(device);
-model = model.load_state_dict(get_file(),map_device=device);
+get_file(url);
+
+model.load_state_dict(torch.load("output.weights.pt",map_location=device));
 
 # dataset creation
 class CustomDataset(Dataset):
@@ -68,7 +97,7 @@ class CustomDataset(Dataset):
 			raise FileNotFoundError(path_x);
 		
 		with open(path_x,'r') as file:
-			self.x = f.readlines();
+			self.x = file.readlines();
 			
 	def __len__(self):
 		return len(self.x);
@@ -83,26 +112,30 @@ class CustomDataset(Dataset):
 		};
 
 # dataloader creation
-test_dataset = Dataset(f"./Data/DATA/{test_file_location}",max_length);
-test_dataloader = DataLoader(test_dataset,batch_size=8);
+max_length = 512;
+test_dataset = CustomDataset(f"./Data/DATA/{test_file_location}",max_length);
+test_dataloader = DataLoader(test_dataset,batch_size=2);
 
 
-test = []
-for batch in test_dataloader:
-  model.eval();
+test = [];
 
+model.eval();
+for batch in tqdm(test_dataloader,ascii=True,desc="Processing..."):
   input_ids = batch['input_ids'].to(device);
   attention_mask = batch['attention_mask'].to(device);
 
   output = model(input_ids,attention_mask);
   y_pred = torch.argmax(output,dim=-1);
   test.append(y_pred);
+  
+  gc.collect();
+
 
 tmp = [];
 for batch in test:
-    for line in batch:
-        tmp.append(line.item());
-        
+	for line in batch:
+		tmp.append(line.item());
+
 id_to_label = {
     0:"passage",
     1:"phrase",
