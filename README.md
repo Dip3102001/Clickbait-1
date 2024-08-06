@@ -12,9 +12,9 @@ This project repository includes, all experiment carried out for clickbait class
 ## Installation
 
 ### Running on google colab
-<div style="text-align: justify;">
+<p style="text-align: justify;">
 I am highly recommending to try and test python script on google colab, because of high RAM usage might cause local system crash. Moreover, all experiements were carried out using google colab environment. Therefore, there will be no additional requirement to install if script are run on google colab environment. 
-</div>
+</p>
 
 #### steps to run script on google colab enviroment.
 1. configuring user-name and email.
