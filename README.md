@@ -38,9 +38,7 @@ I am highly recommending to try and test python script on google colab, because 
 ### Running on local system
 
 #### Requirement 
-<div style='text-align: center;'>
-In order to execute script on local system, it is require to meet following installation requirement. Installation of below dependencies differ from one OS to other. Please find steps on web to install below dependencies for Windows/Linux/MAC. 
-</div>
+In order to execute script on local system, it is require to meet following installation requirement. Installation of below dependencies differ from one OS to other. Please find steps on web to install below dependencies for Windows/Linux/MAC.
 
 1. git
 2. python
