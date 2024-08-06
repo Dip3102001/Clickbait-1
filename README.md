@@ -86,6 +86,7 @@ python3 main.py
  
 ## Usage
 
+- main.py is python script file for evaluation of different task carried out during study for clickbait-classification. This python script file is interactive. Which asks for input from the user about which different hyperparameter setting one want to try. The reason why I made it interactive because there are in total more than 10 different hyperparameter setting configuration. Which makes it difficult to take input from command line and parse it down. 
 
 ## Contact Information
 
