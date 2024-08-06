@@ -50,7 +50,7 @@ Once, above installation condition meet, we can start configuring environment fo
 1. cloning repo to local environment
 ```bash
 # cloning repo
-git clone 'https://github.com/'
+git clone 'https://github.com/Dip3102001/Clickbait-1'
 ```
 
 2. configuring environment
@@ -61,7 +61,8 @@ pip install -r 'requirement.txt'
 
 3. running main.py 
 ```bash
-# python3 main.py
+# running main.py
+python3 main.py
 ```
  
 ## Usage
