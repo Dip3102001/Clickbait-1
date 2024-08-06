@@ -89,3 +89,4 @@ python3 main.py
 
 ## Contact Information
 
+For questions or inquiries, please contact me at: [dv9patel@uwaterloo.ca](mailto:dv9patel@uwaterloo.ca)
