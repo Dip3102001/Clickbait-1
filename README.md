@@ -21,7 +21,7 @@ I am highly recommending to try and test python script on google colab, because 
 2. cloning repository to google colab environment.
 
 
-![cloning repo to colab](https://github.com/Dip3102001/Clickbait-1/blob/main/SS/cloning_repo.png)
+![cloning repo to colab](https://github.com/Dip3102001/Clickbait-1/blob/main/SS/cloning.png)
 
 3. moving into clonned directory.
 
