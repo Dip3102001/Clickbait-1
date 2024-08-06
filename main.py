@@ -17,6 +17,8 @@ from tqdm import tqdm;
 
 import gc;
 
+pd.set_option('display.max_colwidth', None);
+
 weight_file_location = "weights.pt";
 
 #device = torch.device("cuda" if torch.cuda.is_available() else "cpu");
