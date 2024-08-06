@@ -12,9 +12,8 @@ This project repository includes, all experiment carried out for clickbait class
 ## Installation
 
 ### Running on google colab
-<p style="text-align: justify;">
 I am highly recommending to try and test python script on google colab, because of high RAM usage might cause local system crash. Moreover, all experiements were carried out using google colab environment. Therefore, there will be no additional requirement to install if script are run on google colab environment. 
-</p>
+
 
 #### steps to run script on google colab enviroment.
 1. configuring user-name and email.
@@ -68,19 +67,19 @@ python3 main.py
 ```
 ## Project structure
 
-1. Data Folder
+1. *Data Folder
 - Data folder contains all training, evaluation and test data.
 
-2. outout Folder
+2. *outout Folder
 - downloaded weights from the cloud and output generated via main.py is kept inside output folder.
 
-3. main.py
+3. *main.py
 - main scirpt file to evaluate task-1 with different hyperparameter setting. This script is created for inference purpose only. 
 
-4. requirement.txt
+4. *requirement.txt
 - contains all Python packages that were used during project running.
 
-5. weights.pt
+5. *weights.pt
 - This is human readable comma seperated file containing data about the location of weights file on cloud. extension '.pt' is bit misleading, rather it nothing but character human readable file.
 
  
