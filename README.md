@@ -17,17 +17,19 @@ I am highly recommending to try and test python script on google colab, because 
 ![configuring user-name and email address](https://github.com/Dip3102001/Clickbait-1/blob/main/SS/config_name_email.png)
 
 2. cloning repository to google colab environment.
-![cloning repo to colab]()
+![cloning repo to colab](https://github.com/Dip3102001/Clickbait-1/blob/main/SS/cloning_repo.png)
 
 3. moving into clonned directory.
-![chdir]()
+![chdir](https://github.com/Dip3102001/Clickbait-1/blob/main/SS/chdir.png)
 
 4. running main.py script.
-![running main.py]()
+![running main.py](https://github.com/Dip3102001/Clickbait-1/blob/main/SS/main.png)
  
 ## Usage
 
 
-
 ## File discription
+
+
+## Contact Information
 
